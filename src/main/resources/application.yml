@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/online_retailers?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 20001218
+  jackson:
+    time-zone: Asia/Shanghai
+    date-format: yyyy-MM-dd
+server:
+  port: 8080
+  servlet:
+    context-path:
+#logging:
+
+#  level: debug
+#    root: warn
+#    com.yuan.online.model.dao: trace
+#  config: build/resources/main/log4j.properties
+  #  pattern:
+#    console: '%p%m%n'
+
+mybatis-plus:
+  mapper-locations: classpath:com/yuan/demo/mapper/*.xml
