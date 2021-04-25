@@ -1,15 +1,11 @@
 package com.yuan.online.controller
 
 import com.yuan.online.common.ApiResponse
-import com.yuan.online.common.ApiRestResponse
 import com.yuan.online.common.Constant
-import com.yuan.online.exception.MallException
 import com.yuan.online.exception.MallExceptionEnum
-import com.yuan.online.exception.MallExceptionT
 import com.yuan.online.model.from.UserLoginParam
 import com.yuan.online.model.pojo.User
 import com.yuan.online.service.UserService
-import com.yuan.online.service.impl.UserServiceImpl
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.util.StringUtils
 import org.springframework.web.bind.annotation.*
@@ -45,7 +41,7 @@ class UserController {
         return ApiResponse.success()
     }
     @PostMapping("/login")
-    fun login(@RequestBody param:UserLoginParam,session:HttpSession):ApiResponse{
+    fun login(@RequestBody param:UserLoginParam, session:HttpSession):ApiResponse{
         if (!StringUtils.hasLength(param.userName)){
             return ApiResponse.error(MallExceptionEnum.NEED_USER_NAME)
         }
@@ -56,5 +52,17 @@ class UserController {
         user.password=null
         session.setAttribute(Constant.MALL_USER,user)
         return ApiResponse.success(user)
+    }
+    @PostMapping("/user/update")
+    fun updateUserInfo(session: HttpSession,@RequestParam signature:String):ApiResponse{
+        val user: User? = session.getAttribute(Constant.MALL_USER) as User?
+        if (user==null){
+            return ApiResponse.Companion.error(MallExceptionEnum.NEED_LOGIN)
+        }
+        val curUser= User()
+        curUser.id=user.id
+        curUser.personalizedSignature=signature
+        userService.updateInformation(user)
+        return ApiResponse.success()
     }
 }

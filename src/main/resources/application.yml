@@ -5,6 +5,7 @@ spring:
     username: root
     password: 20001218
   jackson:
+#    property-naming-strategy : CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES
     time-zone: Asia/Shanghai
     date-format: yyyy-MM-dd
 server:

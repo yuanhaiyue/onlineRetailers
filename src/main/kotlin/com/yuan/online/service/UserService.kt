@@ -10,4 +10,6 @@ interface UserService {
     fun register(username:String,password:String)
 
     fun login(loginParam:UserLoginParam):User
+
+    fun updateInformation(user:User)
 }
