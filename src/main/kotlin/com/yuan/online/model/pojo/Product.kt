@@ -1,5 +1,6 @@
 package com.yuan.online.model.pojo
 
+import com.baomidou.mybatisplus.annotation.IdType
 import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
 import lombok.Data
@@ -9,7 +10,7 @@ import java.sql.Timestamp
 @TableName(value = "imooc_mall_product")
 class Product {
 
-    @TableId(value = "id")
+    @TableId(value = "id",type = IdType.AUTO)
     var id:Int?=null
     //max 100
     var name:String?=null

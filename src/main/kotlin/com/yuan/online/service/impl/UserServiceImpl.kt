@@ -8,14 +8,15 @@ import com.yuan.online.model.dao.UserMapper
 import com.yuan.online.model.from.UserLoginParam
 import com.yuan.online.model.pojo.User
 import com.yuan.online.service.UserService
+
 import com.yuan.online.util.MD5Utils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import javax.servlet.http.HttpSession
+
 
 
 @Service
-class UserServiceImpl:UserService{
+class UserServiceImpl: UserService {
     @Autowired
     private lateinit var userMapper:UserMapper
 
@@ -54,6 +55,11 @@ class UserServiceImpl:UserService{
         if (cnt!=1){
             throw MallExceptionT(MallExceptionEnum.UPDATE_FAILED)
         }
-
     }
+
+    override fun checkAdminRole(user: User):Boolean{
+        //1:普通用户 2:管理用户
+        return user.role== 2
+    }
+
 }

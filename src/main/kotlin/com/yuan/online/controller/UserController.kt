@@ -25,6 +25,11 @@ class UserController {
     fun getUser():User?{
         return userService.getUser()
     }
+
+    /**
+     * 用户注册接口
+     *
+     */
     @Throws
     @PostMapping("/register")
     fun register(@RequestParam("userName") userName:String, @RequestParam("password")password:String):ApiResponse{
@@ -40,6 +45,10 @@ class UserController {
         userService.register(userName,password)
         return ApiResponse.success()
     }
+
+    /**
+     * 用户登录接口
+     */
     @PostMapping("/login")
     fun login(@RequestBody param:UserLoginParam, session:HttpSession):ApiResponse{
         if (!StringUtils.hasLength(param.userName)){
@@ -53,11 +62,15 @@ class UserController {
         session.setAttribute(Constant.MALL_USER,user)
         return ApiResponse.success(user)
     }
+
+    /**
+     * 信息更新接口
+     */
     @PostMapping("/user/update")
     fun updateUserInfo(session: HttpSession,@RequestParam signature:String):ApiResponse{
         val user: User? = session.getAttribute(Constant.MALL_USER) as User?
         if (user==null){
-            return ApiResponse.Companion.error(MallExceptionEnum.NEED_LOGIN)
+            return ApiResponse.error(MallExceptionEnum.NEED_LOGIN)
         }
         val curUser= User()
         curUser.id=user.id
@@ -65,4 +78,39 @@ class UserController {
         userService.updateInformation(user)
         return ApiResponse.success()
     }
+    @PostMapping("/user/logout")
+    fun logout(session: HttpSession):ApiResponse{
+        session.removeAttribute(Constant.MALL_USER)
+        return ApiResponse.success()
+    }
+
+    /**
+     * 管理员登录接口
+     * @param param 用户登录参数对象
+     * @param session
+     * @throws MallException
+     */
+
+
+    @PostMapping("/adminLogin")
+    fun adminLogin(@RequestBody param:UserLoginParam, session:HttpSession):ApiResponse{
+        if (!StringUtils.hasLength(param.userName)){
+            return ApiResponse.error(MallExceptionEnum.NEED_USER_NAME)
+        }
+        if (!StringUtils.hasLength(param.password)){
+            return ApiResponse.error(MallExceptionEnum.NEED_PASSWORD)
+        }
+        val user:User=userService.login(param)
+        if (userService.checkAdminRole(user)){
+            user.password=null
+            session.setAttribute(Constant.MALL_USER,user)
+            return ApiResponse.success(user)
+        }else{
+            return ApiResponse.error(MallExceptionEnum.NEED_ADMIN)
+        }
+
+
+
+    }
+
 }

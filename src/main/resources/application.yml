@@ -8,17 +8,21 @@ spring:
 #    property-naming-strategy : CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES
     time-zone: Asia/Shanghai
     date-format: yyyy-MM-dd
+  redis:
+    host: localhost
+    port: 6379
+    password:
 server:
   port: 8080
   servlet:
     context-path:
-#logging:
 
+#logging:
 #  level: debug
 #    root: warn
 #    com.yuan.online.model.dao: trace
 #  config: build/resources/main/log4j.properties
-  #  pattern:
+#    pattern:
 #    console: '%p%m%n'
 
 mybatis-plus:

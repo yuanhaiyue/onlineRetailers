@@ -1,17 +1,16 @@
-package com.yuan.online.model.pojo
+package com.yuan.online.model.vo
 
 import com.baomidou.mybatisplus.annotation.IdType
 import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
 import lombok.Data
+import java.io.Serializable
 import java.sql.Timestamp
 
 
 @Data
+class CategoryVo :Serializable{
 
-@TableName(value = "imooc_mall_category")
-class Category {
-    @TableId(value = "id",type = IdType.AUTO)
     var id:Int?=null
 
     var name:String?=null
@@ -26,5 +25,5 @@ class Category {
 
     var updateTime:Timestamp?=null
 
-
+    var childCategory:ArrayList<CategoryVo> = ArrayList()
 }
