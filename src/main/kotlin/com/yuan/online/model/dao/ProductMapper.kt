@@ -10,6 +10,5 @@ import org.apache.ibatis.annotations.Select
 @Mapper
 interface ProductMapper:BaseMapper<Product> {
 
-    @Select("select from imooc_mall_product where name=#{name}")
-    fun selectByName(@Param("name") name:String):Product?
+
 }

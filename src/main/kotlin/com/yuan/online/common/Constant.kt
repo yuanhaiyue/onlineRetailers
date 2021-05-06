@@ -14,7 +14,7 @@ class Constant {
         val MALL_USER:String="mall_user"
 
         @JvmStatic
-        val FILE_UPLOAD_DIR:String="C:\\Users\\14760\\Desktop\\image"
+        val FILE_UPLOAD_DIR:String="C:\\Users\\14760\\Desktop\\images"
     }
 
 

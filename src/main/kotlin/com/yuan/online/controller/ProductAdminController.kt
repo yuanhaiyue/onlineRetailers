@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
 import java.io.File
+import java.net.URI
+import java.net.URISyntaxException
 import java.util.*
 import javax.servlet.http.HttpServletRequest
 import javax.validation.Valid
@@ -43,12 +45,26 @@ class ProductAdminController {
         val uuid=UUID.randomUUID()
         val newFileName:String=uuid.toString()+suffixName
         val fileDirectory=File(Constant.FILE_UPLOAD_DIR)
-        val distFile=File(Constant.FILE_UPLOAD_DIR+newFileName)
+        val destFile=File(Constant.FILE_UPLOAD_DIR+newFileName)
         if (!fileDirectory.exists()){
             if (!fileDirectory.mkdir()){
                 throw MallExceptionT(MallExceptionEnum.MKDIR_FAILED)
             }
         }
-        return ApiResponse.success()
+        file.transferTo(destFile)
+        return try {
+            ApiResponse.success(getHost(URI(httpServletRequest.requestURL.toString())).toString()+"images/"+newFileName)
+        }catch (e:URISyntaxException){
+            ApiResponse.error(MallExceptionEnum.UPLOAD_FAILED)
+        }
+
+    }
+
+    private fun getHost(uri: URI): URI? {
+        return try {
+            URI(uri.scheme, uri.userInfo, uri.host, uri.port, null, null, null)
+        } catch (e: URISyntaxException) {
+            null
+        }
     }
 }

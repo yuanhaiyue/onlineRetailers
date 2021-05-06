@@ -17,12 +17,12 @@ import org.springframework.stereotype.Service
 class ProductServiceImpl:ProductService {
 
     @Autowired
-    lateinit var productMapper: ProductMapper
+    lateinit var productMapper:
 
     override fun add(addProductReq: AddProductReq){
         val product=Product()
         BeanUtils.copyProperties(addProductReq,product)
-        val productOld: Product? = productMapper.selectByName(addProductReq.name!!)
+        val productOld: Product? = productMapper
         if (productOld!=null){
             throw MallExceptionT(MallExceptionEnum.NAME_EXISTED)
         }
