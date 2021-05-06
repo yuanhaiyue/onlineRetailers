@@ -27,3 +27,6 @@ server:
 
 mybatis-plus:
   mapper-locations: classpath:com/yuan/demo/mapper/*.xml
+
+#上传文件的路径  根据部署情况自行修改
+
