@@ -17,7 +17,7 @@ interface CategoryService {
 
     fun listForAdmin(pageNum: Long, pageSize: Long): IPage<Category>
 
-    fun listCategoryForCustomer(): List<CategoryVo>
+    fun listCategoryForCustomer(categoryId:Int): List<CategoryVo>
 
 
 }

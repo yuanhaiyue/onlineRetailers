@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody
 class GlobalExceptionHandler {
     private val log: Logger =LoggerFactory.getLogger(GlobalExceptionHandler::class.java)
 
-//    @ExceptionHandler(Exception::class)
-//    @ResponseBody
-//    fun handleException(e:Exception):Any{
-//        return ApiResponse.error(MallExceptionEnum.SYSTEM_ERROR)
-//    }
+    @ExceptionHandler(Exception::class)
+    @ResponseBody
+    fun handleException(e:Exception):Any{
+        return ApiResponse.error(MallExceptionEnum.SYSTEM_ERROR)
+    }
 
     @ExceptionHandler(MallExceptionT::class)
     @ResponseBody

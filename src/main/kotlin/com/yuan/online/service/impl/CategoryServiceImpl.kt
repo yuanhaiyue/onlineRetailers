@@ -72,9 +72,9 @@ class CategoryServiceImpl :CategoryService{
     }
 
     @Cacheable(value = ["listCategoryForCustomer"])
-    override fun listCategoryForCustomer():List<CategoryVo>{
+    override fun listCategoryForCustomer(categoryId:Int):List<CategoryVo>{
         val  categoryVoS=ArrayList<CategoryVo>()
-        recursivelyFindCategories(categoryVoS,0)
+        recursivelyFindCategories(categoryVoS,categoryId)
         return categoryVoS
     }
     fun recursivelyFindCategories(categoryVos: ArrayList<CategoryVo>,parentId:Int){

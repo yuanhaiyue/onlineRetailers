@@ -105,7 +105,7 @@ class CategoryController {
     @ApiOperation("前台目录列表")
     @PostMapping("/category/list")
     fun listCategoryCustomer():ApiResponse{
-        val categoryVos:List<CategoryVo> = categoryService.listCategoryForCustomer()
+        val categoryVos:List<CategoryVo> = categoryService.listCategoryForCustomer(0)
         return ApiResponse.success(categoryVos)
     }
 }
