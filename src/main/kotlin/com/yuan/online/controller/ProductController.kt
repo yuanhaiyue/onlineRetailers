@@ -32,4 +32,6 @@ class ProductController {
         val iPage=productService.list(productListReq)
         return ApiResponse.success(iPage)
     }
+
+
 }

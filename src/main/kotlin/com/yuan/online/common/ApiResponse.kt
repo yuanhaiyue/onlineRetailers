@@ -15,7 +15,7 @@ data class ApiResponse(var status:Int?=null,var msg:String?=null,var data:Any?=n
         }
 
         @JvmStatic
-        fun success(result:Any): ApiResponse {
+        fun success(result:Any?): ApiResponse {
             val resp= ApiResponse()
             resp.data=result
             return resp

@@ -1,11 +1,13 @@
 package com.yuan.online.common
 
 import lombok.Getter
+import org.springframework.stereotype.Component
 
 
 /**
  * 描述
  */
+@Component
 class Constant {
 
     companion object{
