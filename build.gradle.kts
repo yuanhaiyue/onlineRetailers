@@ -44,6 +44,7 @@ dependencies {
     implementation("io.springfox:springfox-boot-starter:3.0.0")
     implementation("org.springframework.boot:spring-boot-starter-data-redis:2.4.5")
     implementation("org.springframework.boot:spring-boot-starter-cache:2.4.5")
+    implementation("com.google.zxing:javase:3.3.0")
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("mysql:mysql-connector-java")
     annotationProcessor("org.projectlombok:lombok")

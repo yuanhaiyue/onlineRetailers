@@ -30,3 +30,7 @@ mybatis-plus:
 
 #上传文件的路径  根据部署情况自行修改
 
+file:
+  upload:
+    ip: 127.0.0.1
+

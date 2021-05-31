@@ -16,7 +16,7 @@ class UserFilterConfig {
     fun userFilter(): UserFilter {
         return UserFilter()
     }
-    @Bean(name = ["adminFilterConf"])
+    @Bean(name = ["userFilterConf"])
     fun adminFilterConfig():FilterRegistrationBean<UserFilter>{
         val filterRegistrationBean=FilterRegistrationBean<UserFilter>()
         filterRegistrationBean.filter=userFilter()

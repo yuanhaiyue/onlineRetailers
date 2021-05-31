@@ -1,6 +1,7 @@
 package com.yuan.online.service.impl
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper
 import com.yuan.online.common.CartStatus
 import com.yuan.online.common.Constant
 import com.yuan.online.common.SaleStatus
@@ -123,6 +124,32 @@ class CartServiceImpl :CartService {
             //此商品在记录在购物车中，则删除记录
             cartMapper.deleteById(cart.id)
         }
+        return this.list(userId)
+    }
+
+    override fun selectOrNot(userId:Int,productId: Int?,selected:Int):List<CartVo>{
+        val wrapper=UpdateWrapper<Cart>()
+        val query=QueryWrapper<Cart>()
+        query.eq("user_id",userId).eq("product_id",productId)
+        val cart:Cart?=cartMapper.selectOne(wrapper)
+        if (cart==null){
+            throw MallExceptionT(MallExceptionEnum.UPDATE_FAILED)
+        }else{
+            //商品在购物车中
+            val cartTwo=Cart()
+            cartTwo.selected=selected
+            wrapper.eq("user_id",userId).eq(productId!=null,"product_id",productId)
+            cartMapper.update(cartTwo,wrapper)
+        }
+        return list(userId)
+    }
+
+
+    override fun selectAllOrNot(userId: Int,selected: Int):List<CartVo>{
+        val wrapper=UpdateWrapper<Cart>()
+        val cart=Cart()
+        cart.selected=selected
+        wrapper.eq("user_id",userId)
         return this.list(userId)
     }
 }

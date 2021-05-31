@@ -24,7 +24,9 @@ class OrderItem {
 
     var quantity:Int?=null
 
-    var totalPrice:Timestamp?=null
+    var totalPrice:Int?=null
 
     var createTime:Timestamp?=null
+
+    var updateTime:Timestamp?=null
 }

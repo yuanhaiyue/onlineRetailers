@@ -7,7 +7,6 @@ import com.yuan.online.service.CartService
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
-import javax.servlet.http.HttpSession
 
 /**
  * 描述     购物车Controller
@@ -53,4 +52,22 @@ class CartController {
         return ApiResponse.success(cartS)
     }
 
+    @ApiOperation("选择/不选择购物车的某商品")
+    @PostMapping("/select")
+    fun select(@RequestParam productId: Int,@RequestParam selected:Int):ApiResponse{
+        //不能传入userId
+        val id:Int=UserFilter.currentUser.id!!
+        val cartS:List<CartVo> =cartService.selectOrNot(id,productId,selected)
+        return ApiResponse.success(cartS)
+    }
+
+
+    @PutMapping("/selectAll")
+    @ApiOperation("全选择/全不选 购物车模块")
+    fun selectAll(@RequestParam selected: Int):ApiResponse{
+        //不能传入userId
+        val id:Int=UserFilter.currentUser.id!!
+        val cartS:List<CartVo> =cartService.selectAllOrNot(id,selected)
+        return ApiResponse.success(cartS)
+    }
 }
